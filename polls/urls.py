@@ -1,11 +1,7 @@
-from django.urls import path, include
-from .views import TaskViewSet
-from rest_framework.routers import DefaultRouter
-
-router = DefaultRouter()
-router.register(r'Task', TaskViewSet, basename='Task')
+from django.urls import path
+from .views import TaskListCreateView, TaskRetrieveUpdateDestroyView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('tasks/', TaskListCreateView.as_view(), name='task-list-create'),
+    path('tasks/<int:pk>/', TaskRetrieveUpdateDestroyView.as_view(), name='task-retrieve-update-destroy'),
 ]
-
